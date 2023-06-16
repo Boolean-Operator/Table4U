@@ -1,6 +1,14 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Table 4 U
 
-## Getting Started
+Table 4 U is a restaurant reservation booking application which allows users to search area restaurants by location, price and cuisine. Peruse the menu and read reviews. Once you find the restaurant you like, check availability and book a table.
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). Using Tailwinds and PostgreSQL with Supabase(for now). Later versions will be hosted on AWS with an AWSRDS instance.
+
+#### Migration Fixes
+
+- Dynamic Metadata in `/restaurant/[slug] route`
+
+##### Getting Started
 
 First, run the development server:
 
@@ -8,12 +16,4 @@ First, run the development server:
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-## Migration Fixes
-
-- Dynamic Metadata in `/restaurant/[slug] route`
