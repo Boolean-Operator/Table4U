@@ -7,6 +7,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 #### Migration Fixes
 
 - Dynamic Metadata in `/restaurant/[slug] route`
+- Fixed SSH Key error from Github update
 
 ##### Getting Started
 
