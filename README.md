@@ -4,16 +4,9 @@ Table 4 U is a restaurant reservation booking application which allows users to 
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). Using Tailwinds and PostgreSQL with Supabase(for now). Later versions will be hosted on AWS with an AWSRDS instance.
 
-#### Migration Fixes
+#### Fixes
 
 - Dynamic Metadata in `/restaurant/[slug] route`
-- Fixed SSH Key error from Github update .112.4
-- Fixed SSH Key error from Github update .112.3
-- Fixed SSH Key error from Github update .113.4
-- Fixed SSH Key error from Github update .114.3
-- didn't stick
--
--
 
 ##### Getting Started
 
