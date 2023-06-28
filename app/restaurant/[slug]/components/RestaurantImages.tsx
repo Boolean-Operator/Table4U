@@ -1,4 +1,6 @@
-export default function Images({
+import Image from 'next/image';
+
+export default function RestaurantImages({
   images,
   name,
 }: {
@@ -12,10 +14,13 @@ export default function Images({
       </h1>
       <div className="flex flex-wrap">
         {images.map((image, idx) => (
-          <img
+          <Image
+            key={`${name}_${idx}`}
             className="w-56 h-44 mr-1 mb-1"
             src={image}
             alt={`${name}_menu_image_${idx}`}
+            width={250}
+            height={250}
           />
         ))}
       </div>

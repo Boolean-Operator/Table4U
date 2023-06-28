@@ -1,5 +1,5 @@
 import Description from './components/Description';
-import Images from './components/Images';
+import RestaurantImages from './components/RestaurantImages';
 import Rating from './components/Rating';
 import ReservationCard from './components/ReservationCard';
 import RestaurantNavBar from './components/RestaurantNavBar';
@@ -64,7 +64,7 @@ export default async function RestaurantDetails({
         <Title name={restaurant.name} />
         <Rating reviews={restaurant.reviews} />
         <Description description={restaurant.description} />
-        <Images images={restaurant.images} name={restaurant.name} />
+        <RestaurantImages images={restaurant.images} name={restaurant.name} />
         <Reviews reviews={restaurant.reviews} />
       </div>
       <div className="w-[27%] relative text-reg">

@@ -6,8 +6,7 @@ import { useRouter } from 'next/navigation';
 export default function SearchBar() {
   const router = useRouter();
   const [location, setLocation] = useState('');
-  console.log(location);
-  console.log(router);
+
   return (
     <div className="text-left text-lg py-3 m-auto flex justify-center">
       <input
@@ -25,7 +24,7 @@ export default function SearchBar() {
           setLocation('');
         }}
       >
-        Let's go
+        {` Let's go`}
       </button>
     </div>
   );
