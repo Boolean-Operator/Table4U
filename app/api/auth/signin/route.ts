@@ -28,41 +28,54 @@ export async function POST(request: Request) {
     }
   });
   if (errros.length) {
-    return NextResponse.json({ errorMessage: errros[0] });
+    return NextResponse.json({ error: errros[0] }, { status: 400 });
   }
 
-  const userWithEmail = await prisma.user.findUnique({
+  const user = await prisma.user.findUnique({
     where: {
       email,
     },
   });
 
-  if (!userWithEmail) {
+  if (!user) {
     return NextResponse.json(
-      { message: 'Email or password is invalid' },
+      { error: 'Email or password is invalid' },
       { status: 401 }
     );
   }
 
-  const isMatch = await bcrypt.compare(password, userWithEmail.password);
+  const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
     return NextResponse.json(
-      { message: 'Email or password is invalid' },
+      { error: 'Email or password is invalid' },
       { status: 401 }
     );
   }
 
   const alg = 'HS256';
   const secret = new TextEncoder().encode(process.env.JWT_SECRET);
-  const token = await new jose.SignJWT({ email: userWithEmail.email })
+  const token = await new jose.SignJWT({ email: user.email })
     .setProtectedHeader({ alg })
     .setExpirationTime('24h')
     .sign(secret);
 
-  return NextResponse.json({
-    status: 200,
-    message: 'Come on in. The water is great.',
-    JWTtoken: token,
-    user: userWithEmail,
+  const currentuser = {
+    firstName: user.first_name,
+    lastName: user.last_name,
+    email: user.email,
+    phone: user.phone,
+    city: user.city,
+  };
+
+  const response = NextResponse.json({ ...currentuser }, { status: 200 });
+
+  response.cookies.set({
+    name: 'jwt',
+    value: token,
+    // cookies should be httpOnly: true
+    httpOnly: false,
+    maxAge: 60 * 60 * 24,
   });
+
+  return response;
 }

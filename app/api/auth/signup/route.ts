@@ -56,7 +56,7 @@ export async function POST(request: Request) {
     }
   });
   if (errros.length) {
-    return NextResponse.json({ errorMessage: errros[0] });
+    return NextResponse.json({ error: errros[0] }, { status: 400 });
   }
 
   const userWithEmail = await prisma.user.findUnique({
@@ -67,12 +67,11 @@ export async function POST(request: Request) {
 
   if (userWithEmail) {
     return NextResponse.json(
-      { message: 'Email is associated with an existing account' },
+      { message: 'Email is already in use' },
       { status: 400 }
     );
   }
 
-  console.dir(password);
   const hashedPassword = await bcrypt.hash(password, 10);
 
   const user = await prisma.user.create({
@@ -93,10 +92,22 @@ export async function POST(request: Request) {
     .setExpirationTime('24h')
     .sign(secret);
 
-  return NextResponse.json({
-    status: 200,
-    message: 'Thanks for signing up. Enjoy your meal.',
-    JWTtoken: token,
-    user: user,
+  const currentuser = {
+    firstName: user.first_name,
+    lastName: user.last_name,
+    email: user.email,
+    phone: user.phone,
+    city: user.city,
+  };
+
+  const response = NextResponse.json({ ...currentuser }, { status: 200 });
+
+  response.cookies.set({
+    name: 'jwt',
+    value: token,
+    httpOnly: true,
+    maxAge: 60 * 60 * 24,
   });
+
+  return response;
 }

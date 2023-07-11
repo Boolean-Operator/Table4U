@@ -30,6 +30,18 @@ export async function GET(req: NextRequest) {
       reviews: true,
     },
   });
+  if (!user) {
+    return NextResponse.json({ error: 'User not found' }, { status: 401 });
+  }
 
-  return NextResponse.json({ user }, { status: 200 });
+  const currentuser = {
+    id: user.id,
+    firstName: user.first_name,
+    lastName: user.last_name,
+    email: user.email,
+    phone: user.phone,
+    city: user.city,
+  };
+
+  return NextResponse.json({ ...currentuser }, { status: 200 });
 }

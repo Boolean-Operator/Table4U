@@ -1,4 +1,5 @@
 import NavBar from './components/NavBar';
+import AuthContext from './context/AuthContext';
 import './globals.css';
 import { Inter } from 'next/font/google';
 
@@ -19,10 +20,12 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <main className="bg-orange-300 min-h-screen w-screen">
-          <main className="max-w-screen-2xl m-auto">
-            <NavBar />
-            {children}
-          </main>
+          <AuthContext>
+            <main className="max-w-screen-2xl m-auto">
+              <NavBar />
+              {children}
+            </main>
+          </AuthContext>
         </main>
       </body>
     </html>
